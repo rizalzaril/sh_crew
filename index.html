@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Street Habits Graffiti</title>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Audiowide&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- GLightbox CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- GLightbox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+    <!-- Custom Style -->
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #111;
+        color: #fff;
+        overflow-x: hidden;
+        font-weight: lighter;
+        letter-spacing: 0px;
+      }
+
+      p {
+        color: #bebbbb;
+      }
+
+      .audiowide-regular {
+        font-family: "Audiowide", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+      }
+
+      nav.navbar {
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(5px);
+      }
+      .hero {
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: url("./img/sh.jpg") center/cover no-repeat;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* overlay lebih gelap supaya tulisan lebih terlihat */
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+      }
+
+      /* Bisa tambahkan gambar tambahan sebagai dekorasi overlay */
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background-size: 150px auto;
+        opacity: 0.2; /* transparansi supaya tidak mengganggu teks */
+        z-index: 2;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 3; /* pastikan di atas overlay dan dekorasi */
+        color: #fff;
+      }
+
+      section {
+        scroll-margin-top: 80px;
+      }
+
+      /* Masonry Gallery ala Pinterest */
+
+      #gallery {
+        background-color: #000;
+      }
+
+      .masonry {
+        column-count: 3;
+        column-gap: 1rem;
+      }
+      .masonry img {
+        width: 100%;
+        display: block;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+      .masonry img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Our Team */
+      .team-member img {
+        width: auto;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .team-slide {
+        gap: 1rem;
+      }
+
+      .footer-event-img {
+        width: 80%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin: 0 auto;
+      }
+
+      #about img {
+        width: 80%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin: 0 auto;
+      }
+
+      #about p {
+        text-align: justify;
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .masonry {
+          column-count: 2;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .team-slide {
+          justify-content: flex-start;
+        }
+        .team-member {
+          flex: 0 0 8%; /* 2 konten per baris */
+          margin-bottom: 1rem;
+        }
+      }
+
+      /* Desktop 3 konten */
+      /* @media (min-width: 769px) {
+        .team-member {
+          flex: 0 0 40%;
+        }
+      } */
+
+      @media (max-width: 576px) {
+        .masonry {
+          column-count: 2;
+        }
+
+        .team-slide {
+          justify-content: flex-start;
+        }
+        .team-member {
+          flex: 0 0 48%; /* 2 konten per baris */
+          margin-bottom: 1rem;
+        }
+        .event-row .col-sm-8 {
+          flex: 0 0 48%;
+          margin-bottom: 1rem;
+          font-size: 0.9rem;
+          padding: 122px;
+        }
+        p {
+          font-size: 0.9rem;
+        }
+
+        #about p {
+          text-align: justify;
+          line-height: 1.6;
+          font-size: 0.9rem;
+        }
+
+        .card-title {
+          font-size: 1rem;
+        }
+
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+
+        .hero-content p {
+          font-size: 1rem;
+        }
+      }
+
+      /* Responsive: tampilkan 2 konten per baris di HP */
+      @media (max-width: 768px) {
+        .event-row .col-sm-8 {
+          flex: 0 0 48%;
+          margin-bottom: 1rem;
+          font-size: 0.9rem;
+          padding: 122px;
+        }
+      }
+
+      footer {
+        background: #000;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a
+          class="navbar-brand fw-bold text-uppercase audiowide-regular"
+          href="#"
+          >SH crew</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#event">Event</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#project">Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero d-flex">
+      <div class="hero-content text-white">
+        <h1 id="hero-title" class="display-3 fw-bold">Graffiti Community</h1>
+        <p class="lead">Expressing art on walls with passion & creativity</p>
+        <a
+          href="https://www.instagram.com/stillhumblecru_/"
+          class="btn btn-danger mt-3"
+          target="_blank"
+        >
+          <i class="fab fa-instagram me-2"></i> Instagram
+        </a>
+      </div>
+    </section>
+
+    <!-- Team Slider -->
+    <section id="team" class="py-5 bg-dark text-light">
+      <div class="container text-center">
+        <h2 class="fw-bold mb-4 audiowide-regular">Our Team</h2>
+        <p class="team-names">
+          BIER | JORD | ZARIL | DANS | ZUHRE | ZARKE | PKNG | PAYS | BARZO |
+          NOVRAY | APTSR | JNZS | KENCY | DEAT | FEBS | HIMEN | PLAY | FRAD |
+          YATSO
+        </p>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h2 class="fw-bold mb-3 audiowide-regular">About Us</h2>
+            <p>
+              Kami adalah tim seniman graffiti dan mural yang berfokus pada
+              karya visual modern di ruang publik. Dengan pengalaman lebih dari
+              2 tahun, kami telah berkolaborasi dengan berbagai sponsor dan
+              event untuk menciptakan karya yang unik, penuh warna, dan memiliki
+              makna.
+            </p>
+
+            <p>
+              Crew asal Kemayoran Jakarta Pusat ini terbentuk di awal Maret 2023
+              dengan tujuan sederhana yaitu: "nyeni bareng tanpa ada yang merasa
+              paling jago". Kenapa namanya "Still Humble"? Karena di crew ini,
+              kita semua setara. Nggak ada yang lebih hebat atau paling keren
+              dalam graffiti. Kita saling belajar, saling ngasih referensi, dan
+              saling support buat berkembang bareng. Buat SH crew, graffiti
+              bukan cuma soal ngegambar di tembok, tapi juga soal kebersamaan
+              dan saling menghargai. Kita suka tuker ide, nge-share teknik, dan
+              kasih motivasi biar semua bisa lebih baik. Intinya, kita maju
+              bareng-bareng tanpa ninggalin satu sama lain.
+            </p>
+          </div>
+          <div class="col-md-6 d-flex justify-content-end">
+            <img
+              src="./img/sh.jpg"
+              style="width: 50%"
+              class="img-fluid rounded shadow"
+              alt="About Image"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event -->
+    <section id="event" class="py-5">
+      <div class="container px-3 px-sm-4">
+        <h2 class="text-center fw-bold mb-4 audiowide-regular">Events</h2>
+        <div class="container">
+          <div class="row g-4 event-row">
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-dark text-white h-100">
+                <img
+                  src="./img/small_room.webp"
+                  class="card-img-top"
+                  alt="Event 1"
+                />
+
+                <div class="card-body">
+                  <h5 class="card-title">SMALL ROOM PRESENT 2025</h5>
+                  <p class="card-text">
+                    Kolaborasi Dengan Street Artist & Album Launching Showcase:
+                    OMPLR – 'Babad Tanah Urban' | Presented by Small Room Soul
+                  </p>
+
+                  <p>Lokasi: Lima Dua Cafe Bar Jakarta</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-dark text-white h-100">
+                <img
+                  src="./img/Art_is_pulse.jpg"
+                  class="card-img-top"
+                  alt="Event 2"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">
+                    ART IS PULSE OF LIFE DATANG DENGAN VOL.2
+                  </h5>
+                  <p class="card-text">
+                    Event Kolaborasi Antar Seniman Dengan Kegiatan Live Painting
+                    | Workshop | Nail Art | Dj Performance | Live Music.
+                  </p>
+                  <p>Lokasi: Clay Coffee Space Jakarta</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="card bg-dark text-white h-100">
+                <img
+                  src="./img/back_on_track.jpg"
+                  class="card-img-top"
+                  alt="Event 3"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">BACK ON TRACK</h5>
+                  <p class="card-text">
+                    Event Pameran Gallery Yang Bertema "Rise Up".
+                  </p>
+
+                  <p>Lokasi: Yoots Store Jakarta</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <img class="mt-5 footer-event-img" src="./img/Trims.webp" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Project -->
+    <section id="project" class="py-5 bg-dark">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-4 audiowide-regular">Projects</h2>
+        <div class="row g-4">
+          <!-- Project 1 -->
+          <div class="col-md-6">
+            <div class="p-4 bg-black rounded shadow h-100 text-center">
+              <img
+                src="./img/cartago.jpg"
+                alt="Community Mural Project"
+                class="img-fluid rounded mb-3"
+                style="height: 250px; object-fit: cover; width: 100%"
+              />
+              <h4>Community Mural Project</h4>
+              <p>
+                Membuat mural bertema kebersamaan dengan warga setempat untuk
+                memperindah lingkungan kota.
+              </p>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div class="col-md-6">
+            <div class="p-4 bg-black rounded shadow h-100 text-center">
+              <img
+                src="./img/Voltasala_mills_jord.jpg"
+                alt="Brand Collaboration"
+                class="img-fluid rounded mb-3"
+                style="height: 250px; object-fit: cover; width: 100%"
+              />
+              <h4>Brand Collaboration</h4>
+              <p>
+                Kolaborasi dengan brand sepatu lokal untuk menciptakan seni
+                visual yang modern dan penuh karakter di ruang publik.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Masonry -->
+    <section id="gallery" class="py-5">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-5 audiowide-regular">Our Gallery</h2>
+        <div class="masonry">
+          <a href="./img/epic_wall_zaril_jord_kency.jpg" class="glightbox">
+            <img src="./img/epic_wall_zaril_jord_kency.jpg" alt="Graffiti 1" />
+          </a>
+          <a href="./img/novre_deat.jpg" class="glightbox">
+            <img src="./img/novre_deat.jpg" alt="Graffiti 2" />
+          </a>
+          <a href="./img/jord_mills.jpg" class="glightbox">
+            <img src="./img/jord_mills.jpg" alt="Graffiti 3" />
+          </a>
+          <a href="./img/dans_bw.webp" class="glightbox">
+            <img src="./img/dans_bw.webp" alt="Graffiti 4" />
+          </a>
+          <a href="./img/zuhre_fire.webp" class="glightbox">
+            <img src="./img/zuhre_fire.webp" alt="Graffiti 5" />
+          </a>
+          <a href="./img/bier_krp.jpeg" class="glightbox">
+            <img src="./img/bier_krp.jpeg" alt="Graffiti 6" />
+          </a>
+          <a href="./img/zaril_abandoned.webp" class="glightbox">
+            <img src="./img/zaril_abandoned.webp" alt="Graffiti 7" />
+          </a>
+          <a href="./img/jord.jpg" class="glightbox">
+            <img src="./img/jord.jpg" alt="Graffiti 8" />
+          </a>
+          <a href="./img/sh.jpg" class="glightbox">
+            <img src="./img/sh.jpg" alt="Graffiti 9" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-5">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-4 audiowide-regular">Contact Us</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <form>
+              <div class="mb-3">
+                <label for="name" class="form-label">Nama</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Masukkan nama anda"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Masukkan email anda"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Pesan</label>
+                <textarea
+                  class="form-control"
+                  id="message"
+                  rows="4"
+                  placeholder="Tulis pesan anda"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-danger">Kirim</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 SH Crew - All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Custom JS Animations -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero title animation
+        gsap.from("#hero-title", {
+          opacity: 0,
+          y: -50,
+          duration: 1.5,
+          ease: "power3.out",
+        });
+
+        // About section
+        gsap.from("#about .col-md-6", {
+          scrollTrigger: { trigger: "#about", start: "top 80%" },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          stagger: 0.3,
+        });
+
+        // Gallery images
+        gsap.from(".masonry img", {
+          scrollTrigger: { trigger: ".masonry", start: "top 80%" },
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          stagger: 0.2,
+        });
+
+        // Event cards
+        gsap.from("#event .card", {
+          scrollTrigger: { trigger: "#event", start: "top 80%" },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          stagger: 0.3,
+        });
+
+        // Project boxes
+        gsap.from("#project .p-4", {
+          scrollTrigger: { trigger: "#project", start: "top 80%" },
+          opacity: 0,
+          x: -50,
+          duration: 1,
+          stagger: 0.3,
+        });
+
+        // Contact form
+        gsap.from("#contact form", {
+          scrollTrigger: { trigger: "#contact", start: "top 80%" },
+          opacity: 0,
+          scale: 0.9,
+          duration: 1,
+        });
+      });
+    </script>
+
+    <script>
+      const lightbox = GLightbox({
+        selector: ".glightbox",
+        touchNavigation: true,
+        loop: true,
+      });
+    </script>
+  </body>
+</html>
